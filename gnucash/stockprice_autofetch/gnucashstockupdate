@@ -1,0 +1,41 @@
+#!/bin/bash
+#Script to fetch price updates for all stocks listed in Gnucash Accounts
+echo ""
+
+if [ $# = 0 ] 
+then
+echo "Error: Missing filename";
+exit 1;
+fi
+
+TARGETFILE=$1
+
+#Check if Accounts file exists
+if [ -f $TARGETFILE ]
+then
+echo "Gnucash accounts file found";
+else
+echo "Gnucash accounts file not found";
+exit 1;
+fi
+
+#Check if Accounts file is locked
+LOCKFILE="$TARGETFILE.LCK"
+
+if [ -f $LOCKFILE ]
+then
+echo "Accounts locked by another instance of Gnucash.";
+exit 1;
+else
+:
+fi
+
+DATE=`date`;
+echo "$DATE: Attempting to fetch updates for $1";
+
+#Add full path to location of gnucashgetquotes
+env `dbus-launch` sh -c 'trap "kill $DBUS_SESSION_BUS_PID" EXIT; /home/username/bin/gnucashgetquotes '"$TARGETFILE"
+
+EXITSTAT=$?
+echo Status:$EXITSTAT
+exit $EXITSTATUS

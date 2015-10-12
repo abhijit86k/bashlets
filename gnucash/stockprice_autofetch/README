@@ -1,0 +1,6 @@
+Gnucash Stock Price Autofetch
+------------------------------
+
+A pair of scripts to automatically fetch stock price updates and safely add them to your gnucash accounts file.
+Included are instructions on how to tell cron to run these scripts daily so you can get price history, trends,
+and can possibly set alarms on price levels or changes.

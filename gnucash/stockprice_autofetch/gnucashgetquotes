@@ -1,0 +1,11 @@
+#!/bin/bash
+#Script to fetch price updates for all stocks listed in Gnucash Accounts
+
+#Uncomment and fill out if you are behind a proxy
+#export http_proxy="http://proxy.url:PORT";
+
+#Set full path to your gnucash binary
+GNUCASH_BINARY=/usr/local/bin/gnucash
+
+$GNUCASH_BINARY --add-price-quotes $@
+exit

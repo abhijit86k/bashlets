@@ -1,0 +1,5 @@
+ROTATEVID
+========
+Rotates videos by 90deg CW using avconv.
+Useful esp. for when you record videos on the phone with the wrong orientation.
+Encoder and codec is fixed for now.

@@ -1,0 +1,37 @@
+#!/bin/bash
+echo "Script to rotate video 90deg CW"
+
+if [ $# = 0 ]
+    then
+    echo "No file. Usage rotatevid source.mp4. Will generate source.rotated.mp4"
+    exit 1
+    fi
+
+if [ $# -ne 1 ]
+    then
+    echo "Too many arguments. Usage rotatevid source.mp4. Will generate source.rotated.mp4"
+    exit 1
+fi
+
+INFILE=$1
+if [ -f $INFILE ]
+    then
+    avconv -i $INFILE 2>&1 | grep -i stream > /dev/null
+    RESULT=$?
+    if [ $RESULT -ne 0 ]
+        then
+        echo "No streams in $1"
+        exit 1
+    fi
+else
+    echo "Unable to open $1"
+exit 1
+fi
+
+filename=$(basename "$INFILE")
+extension="${filename##*.}"
+filename="${filename%.*}"
+OUTFILE=`echo $filename.rotated.mp4`
+
+#echo attempt conversion on $INFILE $OUTFILE
+avconv -i "$INFILE" -vf transpose=1 -codec:v libx264 -r 30 -preset slow -codec:a copy "$OUTFILE"

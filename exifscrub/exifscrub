@@ -1,0 +1,19 @@
+#!/bin/bash
+#A small script to scrub all EXIF info from Photos before posting to the internet!
+
+COPYRIGHT="(c) Abhijit Kshirsagar";
+DATE=$(date +%d%b%Y);
+if [ $# = 0 ] ; then
+echo "Enter one or more filenames."
+#echo "Comment string $COPYRIGHT $DATE"
+exit
+fi
+
+if [ $# = 1 ]
+then
+echo "Only One argument. Scrubbing Exif info from $1."
+echo "Adding comment: $COPYRIGHT $DATE"
+exiftool -all= -comment="$COPYRIGHT $DATE" "$1"
+else
+echo "More than one argument detected. Not yet supported.."
+fi

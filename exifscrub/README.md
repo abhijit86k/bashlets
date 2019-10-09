@@ -10,15 +10,20 @@ Installation:
 
 Usage:
 ------
+```
 $> exifscrub filename
+```
 
 Examples:
 ---------
 Scrub a single file:
+```
 $> exifscrub dsc003263.jpg
-
+```
 Scrub all files in a directory:
+```
 $> for file in *.jpg; do exifscrub $file; done; mkdir originals; mv *.jpg_original ./originals/
+```
 
 NOTES:
 ------

@@ -19,3 +19,7 @@ Caveats
 These scripts are developed by me for a Debian environment.
 Most will work just by installing dependent packages.
 Please leave a message or pull request if you find any bugs or have suggestions.
+
+License
+=======
+See License File

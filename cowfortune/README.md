@@ -13,3 +13,6 @@ Usage:
 $> cowfortune 
 ```
 
+Optional:
+---------
+To enable offensive fortunes, install the package fortunes-off and then enable the -o switch in the script

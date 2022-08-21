@@ -1,0 +1,10 @@
+#!/bin/bash
+#cowthink `fortune`
+COW=$(cowsay -l|ruby -e '$<.readline;l=$<.read.split;puts l[l.size*rand]')
+
+#For Regular fortunes:
+fortune | cowsay -n -f $COW
+
+#For offensive fortunes (Usually NSFW):
+#fortune -o| cowsay -n -f $COW
+

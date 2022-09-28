@@ -14,15 +14,16 @@ MODE=$2
 
 echo $MODE
 
+
 if [ $ARGS -gt 1 ]
 then
 
 	if [ $MODE = 'v' ]
 		then
 			VIDEO_MODE=' ';
-		else
+	fi
+else
 			VIDEO_MODE='-x';
-		fi
 fi
 	
 	echo $PLAYLIST_URL | grep -i youtube.com/playlist?list=

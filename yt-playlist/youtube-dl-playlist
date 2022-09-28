@@ -1,0 +1,46 @@
+#!/bin/bash
+ARGS=$#
+
+if [ $ARGS -eq 0 ]
+then
+	echo "No parameters provided"
+	echo "Usage: youtube-dl-playlist PLAYLIST_URL [MODE]"
+	echo "Playlist URL must be of the the form \"youtube.com/playlist?list=\" "
+	echo "Mode can be \"v\" for video mode, else audio only by default"
+fi
+
+PLAYLIST_URL=$1
+MODE=$2
+
+echo $MODE
+
+if [ $ARGS -gt 1 ]
+then
+
+	if [ $MODE = 'v' ]
+		then
+			VIDEO_MODE=' ';
+		else
+			VIDEO_MODE='-x';
+		fi
+fi
+	
+	echo $PLAYLIST_URL | grep -i youtube.com/playlist?list=
+	
+	if [ $? = 1 ] ;
+		then echo "Invalid URL. URL must contain \"youtube.com/playlist?list=\" ";
+	else
+		PLAYLIST_NAME=`youtube-dl --flat-playlist $PLAYLIST_URL | grep -i '\[download\] Downloading playlist: ' | sed 's/\[download\] Downloading playlist: //g'`;
+		PLAYLIST_NAME=`echo $PLAYLIST_NAME | sed 's/\ /_/g' | sed 's/[^[:alnum:]_]\+//g'`;
+		echo $PLAYLIST_NAME	
+		{
+		mkdir "$PLAYLIST_NAME"
+		}||
+		{
+		DATE=`date`;
+		PLAYLIST_NAME="PlaylistDownload-$DATE"; echo "alternate dir name is $PLAYLIST_NAME";mkdir "$PLAYLIST_NAME"
+		}
+		cd "$PLAYLIST_NAME"
+		youtube-dl $VIDEO_MODE --playlist-start 1 --yes-playlist --audio-format mp3 --audio-quality 0 $PLAYLIST_URL
+		cd ..
+	fi

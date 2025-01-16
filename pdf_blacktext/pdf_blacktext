@@ -1,0 +1,19 @@
+#!/bin/bash
+#A small script to convert all PDF text to black for printing
+
+if [ $# = 0 ] ; then
+echo "Enter Filename"
+echo "Usage: pdf_blacktext filename.pdf"
+exit
+fi
+
+if [ $# = 1 ]
+then
+gs  -sOutputFile=output.pdf  -sDEVICE=pdfwrite -dBlackText  -dBlackVector -dCompatibilityLevel=1.4  -dNOPAUSE  -dBATCH "$1"
+echo "Output Written to output.pdf"
+else
+echo "More than one argument detected. Not yet supported."
+fi
+
+#Source: https://askubuntu.com/questions/727906/convert-pdf-to-monochrome-black-and-white-via-command-line
+
